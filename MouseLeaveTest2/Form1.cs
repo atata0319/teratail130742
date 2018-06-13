@@ -42,7 +42,7 @@ namespace MouseLeaveTest2
         {
             const int WM_MOUSEMOVE = 0x0200;
             const int WM_NCMOUSEMOVE = 0x00A0;
-            if ((m.Msg == WM_MOUSEMOVE || m.Msg == WM_NCMOUSEMOVE) && panel1.Visible)
+            if (m.Msg == WM_MOUSEMOVE || m.Msg == WM_NCMOUSEMOVE)
             {
                 Point current;
                 var control = Control.FromHandle(m.HWnd);
