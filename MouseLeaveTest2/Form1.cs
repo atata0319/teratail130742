@@ -45,11 +45,18 @@ namespace MouseLeaveTest2
             if (m.Msg == WM_MOUSEMOVE || m.Msg == WM_NCMOUSEMOVE)
             {
                 Point current;
-                var control = Control.FromHandle(m.HWnd);
-                if (control != null)
-                    current = panel1.PointToClient(control.PointToScreen(new Point(m.LParam.ToInt32())));
+                if (m.Msg == WM_NCMOUSEMOVE)
+                {
+                    current = panel1.PointToClient(new Point(m.LParam.ToInt32()));
+                }
                 else
-                    current = panel1.PointToClient(Cursor.Position);
+                {
+                    var control = Control.FromHandle(m.HWnd);
+                    if (control != null)
+                        current = panel1.PointToClient(control.PointToScreen(new Point(m.LParam.ToInt32())));
+                    else
+                        current = panel1.PointToClient(Cursor.Position);
+                }
                 //Debug.Print("WM_MOUSEMOVE: {0}", current);
                 if (panel1.ClientRectangle.Contains(current))
                 {
